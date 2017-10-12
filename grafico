@@ -1,0 +1,118 @@
+#include <winbgim.h>
+#include <iostream>
+#include <cstdlib>
+#include<conio.h>
+#include <string.>
+#include <stdio.h>
+#include <stack>
+#include <windows.h>
+#include <string>
+#include <algorithm>
+#define MAX 100
+HANDLE hCon;
+ 
+using namespace std;
+ 
+void waitForLeftMouseClick();
+void SetColor(int i);
+ 
+int grafica()
+{
+ 
+    settextstyle(0,0,2);
+ 
+    setcolor(WHITE);
+    outtextxy(50,70,"TEORIA DE LA COMPUTACION");
+    outtextxy(70,90," APD [ww^r]");
+    setcolor(RED);
+    settextstyle(0,0,1);
+    setlinestyle(CENTER_LINE,20,2);
+ 
+    circle (108, 260, 40);circle (60, 260, 6);circle (60, 260, 4);circle (60, 260, 2);//0
+    circle (343, 260, 35);circle (343, 260, 40);//1
+ 
+    setlinestyle(CENTER_LINE,20,2);
+    setcolor(WHITE);
+    settextstyle(0,0,2);
+    outtextxy(85,250,"q0");
+    outtextxy(320,250,"q1");
+ 
+    setcolor(LIGHTBLUE);
+    //////conectores
+    settextstyle(0,0,2);
+    arc (225, 390, 60, 120, 180);circle (311, 235, 4);//0,1
+    arc (108, 210, 320, 220, 25);circle (128, 223, 4);//0,0
+    arc (340, 210, 320, 220, 25);circle (355, 223, 4);//1,1
+    setcolor(YELLOW);
+    outtextxy (50, 140,"a, & / X");
+    outtextxy (50, 157,"b, & / Y");
+    outtextxy (290, 140,"X, & / a");
+    outtextxy (290, 157,"Y, & / b");
+    outtextxy (155, 235,"&, & / &");
+    return 0;
+}
+ 
+void waitForLeftMouseClick()
+{
+    clearmouseclick(WM_LBUTTONDOWN);
+    const int DELAY = 50; 
+    int x, y;
+    while (!ismouseclick(WM_LBUTTONDOWN))
+        delay(DELAY);
+    getmouseclick(WM_LBUTTONDOWN, x, y);
+}
+ 
+void reconocedor()
+{
+     stack<char>operation;    
+     string palabra,sub_palabra;
+     int tam,tamb;
+     cout<<"\n --> Ingrese palabra: ";
+     cin>>palabra;
+     tam=palabra.size();    
+     tamb=tam-1;
+ 
+     string pri_palabra=("c"+palabra.substr(1,tamb/2));//primera parte de la cadena
+     string   sec_palabra=(palabra.substr(tamb/2+1,tamb)+"c");//segunda parte de la cadena
+ 
+     string inv_palabra(sec_palabra.begin(),sec_palabra.end());//invierto sec_palabra
+     reverse(inv_palabra.begin(),inv_palabra.end());
+ 
+     if(pri_palabra==inv_palabra)//si la primera subcadena es igual a la segunda subcadena
+     {
+          settextstyle(0,0,2);
+          setcolor(GREEN);
+          outtextxy(100,350,"Palabra Aceptada");
+           int i=0;
+           SetColor(10);cout<<"\n\tEmpilando en q0 :"<<endl; setcolor(6);cout<<"\t[";setcolor(15);="" cout<<"="" _="" ";setcolor(6);cout<<"]";setcolor(15);="" while(i<="tam)" {="" for(int="" k="0;k<i;k++)" if(palabra[k]="='a'){SetColor(6);cout<<"\t[";SetColor(15);operation.push('X');SetColor(15);" x="" ";setcolor(6);cout<<"]";setcolor(15);}="" else="" y="" {setcolor(6);cout<<"[";setcolor(15);operation.push('z');setcolor(15);="" z="" }cout<<endl;="" i++;="" }="" setcolor(10);cout<<"\n\tpasando="" por="" la="" transicion:="" &,="" &="" "<<endl<<endl;="" setcolor(10);cout<<"\n\tdesempilando="" en="" q1="" :"<<endl;="" for(signed="" int="" i="tam;">=0; i--)
+          {
+              for(signed int j = 0; j < i; j++)
+              {
+                 if(palabra[j]=='a'){SetColor(6);cout<<"\t[";SetColor(15); operation.top(); operation.pop(); cout<<" X ";SetColor(6);cout<<"]";SetColor(15);}
+                 else if(palabra[j]=='b'){SetColor(6);cout<<"\t[";SetColor(15); operation.top(); operation.pop(); cout<<" Y ";SetColor(6);cout<<"]";SetColor(15);}
+                 else               {SetColor(6);cout<<"[";SetColor(15); operation.top(); operation.pop(); cout<<" Z ";SetColor(6);cout<<"]";SetColor(15);}
+              }
+           cout<<endl; }="" setcolor(6);cout<<"\t[";setcolor(15);="" cout<<"="" _="" ";setcolor(6);cout<<"]";setcolor(15);="" else{="" settextstyle(0,0,2);="" setcolor(green);="" outtextxy(100,350,"palabra="" rechazada");="" void="" imprimematrix()="" {="" char="" a="156;" setcolor(10);="" cout<<"\n\t\t\t="" matriz="" del="" apd="" [ww^r]"<<endl<<endl;setcolor(11);="" cout<<"\t="" alfabeto="" ("<<a<<"):";setcolor(15);cout<<"a,b"<<endl;setcolor(11);="" estados="" :";setcolor(15);cout<<"="" q0,q1"<<endl;setcolor(11);="" e.inicial="" q0"<<endl;setcolor(11);="" e.final="" q1"<<endl<<endl;="" setcolor(15);="" int="" main(int="" argc,="" *argv[])="" initwindow(500,500);="" abre="" una="" ventana="" de="" 500="" x="" grafica();="" op,ant,estado;="" palabra[50];="" do{="" system("cls");="" cout<<endl;="" cout<<"\t\t="" ÉÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ»="" "<<endl;="" º="" automata="" pila="" deterministico(definido)="" ÈÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍÍ¼\n"<<endl;="" cout<<"\n\t\t="" [1]="" reconocedor="" palabra"<<endl;="" [2]="" salir"<<endl<<endl;="" setcolor(15);cout<<"\n\t="" -=""> Ingrese opcion: ";
+        cin>>op;
+        switch(op)
+        {
+                   case 1:
+                           {
+                               system("cls");
+                            imprimematrix();
+                            cout<<"\t\t";reconocedor();
+                            getch();
+                            break;}
+                   };                 
+        }while(op!=2);
+    system("PAUSE");
+    return EXIT_SUCCESS;
+}
+ 
+void SetColor(int i)
+    {
+     if(hCon == NULL)
+     hCon = GetStdHandle(STD_OUTPUT_HANDLE);
+     SetConsoleTextAttribute(hCon, i);
+    }
+</endl;></endl;></char></algorithm></string></windows.h></stack></stdio.h></string.></conio.h></cstdlib></iostream></winbgim.h>
